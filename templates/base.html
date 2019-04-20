@@ -217,7 +217,8 @@
   {% if GITHUB_CORNER_URL %}
   {% include 'partial/github.html' %}
   {% endif %}
-</body>
+
+  <-- For custom js in articles -->
 {% if article %}
     {% if article.javascripts %}
         {% for javascript in article.javascripts %}
@@ -225,4 +226,6 @@
         {% endfor %}
     {% endif %}
 {% endif %}
+
+</body>
 </html>
