@@ -7,6 +7,13 @@
 <!DOCTYPE html>
 <html lang="{{ DEFAULT_LANG }}">
 <head>
+  {% if article %}
+    {% if article.stylesheets %}
+        {% for stylesheet in article.stylesheets %}
+{{ stylesheet }}
+        {% endfor %}
+    {% endif %}
+    {% endif %}
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="HandheldFriendly" content="True" />
@@ -211,4 +218,11 @@
   {% include 'partial/github.html' %}
   {% endif %}
 </body>
+{% if article %}
+    {% if article.javascripts %}
+        {% for javascript in article.javascripts %}
+{{ javascript }}
+        {% endfor %}
+    {% endif %}
+{% endif %}
 </html>
