@@ -1,4 +1,9 @@
+{% if category != "interactive" %}
 {% extends "base.html" %}
+{% else %}
+{% extends "base-fullscreen.html" %}
+{% endif %}
+
 
 {% block meta %}
 <meta name="author" content="{{ article.author.name }}" />
@@ -42,6 +47,7 @@
   <div>
     {{ article.content }}
   </div>
+{% if category != "interactive" %}
   <div class="tag-cloud">
     <p>
       {% if article.tags %}
@@ -51,6 +57,7 @@
       {% endif %}
     </p>
   </div>
+{% endif %}
 
   {% if ADD_THIS_ID %}
   <div class="center social-share">
