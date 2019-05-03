@@ -23,6 +23,7 @@
       {{ translations.translations_for(article) }}
     {% endif %}
     <h1 id="{{ article.slug }}">{{ article.title }}</h1>
+{% if category != "interactive" %}
     <p>
       {{ _('Posted on %(when)s in %(category)s',
            when=article.locale_date,
@@ -32,6 +33,7 @@
         &#8226; {{ article.stats['read_mins'] }} min read
       {% endif %}
     </p>
+{% endif %}
   </header>
 
   {% if GOOGLE_ADSENSE and GOOGLE_ADSENSE.ads.article_top %}

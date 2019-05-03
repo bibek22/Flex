@@ -22,6 +22,8 @@
     {% endif %}
   {% endif %}
 
+  <!-- to fix p5.js sketch on mobile -->
+  <meta name="viewport" content="user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1,width=device-width">
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -109,53 +111,19 @@
     {% if MAIN_MENU %}
     <nav>
       <a href="{{ SITEURL }}">{{ _('Home') }}</a>
-
-      {% for title, link in MENUITEMS %}
-      <a href="{{ link }}">{{ title }}</a>
-      {% endfor %}
-
-      {% if FEED_ALL_ATOM %}
-      <a href="{{ FEED_DOMAIN }}/{{ FEED_ALL_ATOM }}">{{ _('Atom') }}</a>
-      {% endif %}
-
-      {% if FEED_ALL_RSS %}
-      <a href="{{ FEED_DOMAIN }}/{{ FEED_ALL_RSS }}">{{ _('RSS') }}</a>
-      {% endif %}
     </nav>
     {% endif %}
 
     {% block content %}
     {% endblock %}
 
-    <footer>
-      {% if CC_LICENSE %}
-        {% include "partial/cc_license.html" %}
-      {% else %}
-        {% include "partial/copyright.html" %}
-      {% endif %}
-    </footer>
   </main>
-
-  {% if GUAGES %}
-    {% include "partial/guages.html" %}
-  {% endif %}
-
-  {% if ADD_THIS_ID %}
-    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid={{ ADD_THIS_ID }}" async="async"></script>
-  {% endif %}
-
-  {% if PIWIK_URL and PIWIK_SITE_ID %}
-    {% include "partial/piwik.html" %}
-  {% endif %}
-
-  {% include "partial/jsonld.html" %}
-
-  {% block additional_js %}{% endblock %}
 
   {% if GITHUB_CORNER_URL %}
   {% include 'partial/github.html' %}
   {% endif %}
 </body>
+
 {% if article %}
     {% if article.javascripts %}
         {% for javascript in article.javascripts %}
