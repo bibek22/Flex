@@ -1,9 +1,4 @@
-{% if category != "interactive" %}
 {% extends "base.html" %}
-{% else %}
-{% extends "base-fullscreen.html" %}
-{% endif %}
-
 
 {% block meta %}
 <meta name="author" content="{{ article.author.name }}" />
@@ -23,7 +18,6 @@
       {{ translations.translations_for(article) }}
     {% endif %}
     <h1 id="{{ article.slug }}">{{ article.title }}</h1>
-{% if category != "interactive" %}
     <p>
       {{ _('Posted on %(when)s in %(category)s',
            when=article.locale_date,
@@ -33,7 +27,6 @@
         &#8226; {{ article.stats['read_mins'] }} min read
       {% endif %}
     </p>
-{% endif %}
   </header>
 
   {% if GOOGLE_ADSENSE and GOOGLE_ADSENSE.ads.article_top %}
@@ -49,7 +42,6 @@
   <div>
     {{ article.content }}
   </div>
-{% if category != "interactive" %}
   <div class="tag-cloud">
     <p>
       {% if article.tags %}
@@ -59,7 +51,6 @@
       {% endif %}
     </p>
   </div>
-{% endif %}
 
   {% if ADD_THIS_ID %}
   <div class="center social-share">

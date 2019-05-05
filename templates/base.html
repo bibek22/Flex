@@ -7,22 +7,19 @@
 <!DOCTYPE html>
 <html lang="{{ DEFAULT_LANG }}">
 <head>
-
+    <!-- for custom stylesheets and js -->
   {% if article %}
     {% if article.stylesheets %}
         {% for stylesheet in article.stylesheets %}
             {{ stylesheet }}
         {% endfor %}
     {% endif %}
-
     {% if article.javascripts %}
         {% for javascript in article.javascripts %}
             {{ javascript }}
         {% endfor %}
     {% endif %}
   {% endif %}
-
-
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="HandheldFriendly" content="True" />
@@ -67,8 +64,6 @@
     <link rel="manifest" href="/images/site.webmanifest">
     <link rel="shortcut icon" href="/images/favicon.ico">
     <meta name="theme-color" content="#ffffff">
-    <!-- -  <link rel="shortcut icon" href="{{ FAVICON }}" type="image/x-icon">  --> 
-    <!-- <link rel="icon" href="{{ FAVICON }}" type="image/x-icon"> -->
   {% endif %}
 
   {% if GOOGLE_ANALYTICS %}
@@ -109,6 +104,15 @@
   {% endif %}
 </head>
 <body>
+<!-- for inbody javascript -->
+ {% if article %}
+  {% if article.inbodyjs %}
+    {% for javascript in article.inbodyjs.split(", ") %}
+    <script src="{{ javascript }}" type="text/javascript"></script>
+    {% endfor %}
+  {% endif %}
+ {% endif %}
+<!--  -->
   {% if GOOGLE_TAG_MANAGER %}
     {% include "partial/gtm_noscript.html" %}
   {% endif %}
@@ -128,11 +132,11 @@
       {% if pages or LINKS %}
       <nav>
         <ul class="list">
-          {% if not PAGES_SORT_ATTRIBUTE -%}
-              {% set PAGES_SORT_ATTRIBUTE = 'title' %}
+          {% if PAGES_SORT_ATTRIBUTE -%}
+            {% set pages = pages|sort(attribute=PAGES_SORT_ATTRIBUTE) %}
           {%- endif %}
           {% if DISPLAY_PAGES_ON_MENU %}
-          {% for page in pages|sort(attribute=PAGES_SORT_ATTRIBUTE) %}
+          {% for page in pages %}
           <li><a href="{{ SITEURL }}/{{ page.url }}{% if not DISABLE_URL_HASH %}#{{ page.slug }}{% endif %}">{{ page.title }}</a></li>
           {% endfor %}
           {% endif %}
